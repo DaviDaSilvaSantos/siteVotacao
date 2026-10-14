@@ -1,0 +1,198 @@
+:root {
+    --preto: rgb(0, 0, 0);
+    --branco: rgb(255, 255, 255);
+    --raio: 2rem;
+    --fonte: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--fonte);
+    background: var(--branco);
+    color: var(--preto);
+}
+
+.sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* ---------- Celulares e tablets em pé: uma coluna ---------- */
+
+.pagina {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.marca {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: max(1.5rem, env(safe-area-inset-top)) max(1.5rem, env(safe-area-inset-right)) 2rem max(1.5rem, env(safe-area-inset-left));
+}
+
+.logo {
+    width: clamp(11rem, 58vw, 28rem);
+    height: auto;
+}
+
+h1 {
+    margin: 0.5rem 0 0;
+    font-size: clamp(3.25rem, 17vw, 6.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+}
+
+.subnome {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: clamp(1rem, 4.4vw, 1.5rem);
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.lema {
+    margin: 1.25rem 0 0;
+    font-size: clamp(1.6rem, 7vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.lema span {
+    display: block;
+}
+
+.voto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem max(1.5rem, env(safe-area-inset-right)) calc(1.5rem + env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left));
+    background: var(--preto);
+    color: var(--branco);
+    border-radius: var(--raio) var(--raio) 0 0;
+}
+
+.voto p {
+    max-width: 34rem;
+    margin: 0;
+    font-size: clamp(1rem, 4.2vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.55;
+    text-align: left;
+}
+
+.botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 34rem;
+    min-height: 4.25rem;
+    padding: 1rem 2rem;
+    border: 3px solid var(--branco);
+    border-radius: 999px;
+    background: var(--branco);
+    color: var(--preto);
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.botao:active {
+    transform: scale(0.98);
+}
+
+.botao:focus-visible {
+    outline: 4px solid var(--branco);
+    outline-offset: 4px;
+}
+
+@media (hover: hover) {
+    .botao:hover {
+        background: var(--preto);
+        color: var(--branco);
+    }
+}
+
+/* ---------- Desktop, tablet deitado e celular deitado: duas colunas ---------- */
+
+@media (min-width: 56.25em),
+(orientation: landscape) and (min-width: 40em) {
+    .pagina {
+        grid-template-rows: none;
+        grid-template-columns: 1.25fr 1fr;
+    }
+
+    .marca {
+        padding-block: max(1.5rem, env(safe-area-inset-top)) 1.5rem;
+    }
+
+    .logo {
+        width: clamp(9rem, min(26vw, calc(34svh * 2.38)), 30rem);
+    }
+
+    h1 {
+        font-size: clamp(2.75rem, min(8vw, 13svh), 6.5rem);
+    }
+
+    .subnome {
+        font-size: clamp(0.95rem, min(2vw, 3.2svh), 1.5rem);
+    }
+
+    .lema {
+        margin-top: 1rem;
+        font-size: clamp(1.4rem, min(3.2vw, 5.5svh), 2.6rem);
+    }
+
+    .voto {
+        justify-content: center;
+        align-items: flex-start;
+        padding: 2rem max(clamp(1.5rem, 5vw, 5rem), env(safe-area-inset-right)) 2rem clamp(1.5rem, 5vw, 5rem);
+        border-radius: var(--raio) 0 0 var(--raio);
+    }
+
+    .voto p {
+        font-size: clamp(1rem, min(1.6vw, 4svh), 1.4rem);
+    }
+
+    .botao {
+        max-width: 28rem;
+    }
+}
+
+/* ---------- Animação única na abertura ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+    .logo {
+        animation: entrada 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    @keyframes entrada {
+        from {
+            opacity: 0;
+            transform: translateY(-14px);
+        }
+    }
+}
